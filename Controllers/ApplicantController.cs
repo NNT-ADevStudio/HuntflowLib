@@ -18,7 +18,7 @@ namespace HuntflowLib.Controllers
         {
             try
             {
-                using (var client = Auth.HttpClient)
+                using (var client = Auth.GenerateHttpClient())
                 {
                     var response = await client.GetAsync($"{ControllerUrl}/search?q={searchQuery}");
                     var json = await response.Content.ReadAsStringAsync();
@@ -35,7 +35,7 @@ namespace HuntflowLib.Controllers
         {
             try
             {
-                using (var client = Auth.HttpClient)
+                using (var client = Auth.GenerateHttpClient())
                 {
                     var response = await client.GetAsync($"{ControllerUrl}/{id}");
                     var json = await response.Content.ReadAsStringAsync();

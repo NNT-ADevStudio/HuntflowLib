@@ -13,11 +13,13 @@ namespace HuntflowLib.Controllers
         {
         }
 
-        public async Task<bool> ChangeRecruitment(int id, Recruitment recruitment) 
+        public override string ControllerUrl => "applicants";
+
+        public async Task<bool> ChangeRecruitment(int id, Recruitment recruitment)
         {
             try
             {
-                using (var client = Auth.HttpClient)
+                using (var client = Auth.GenerateHttpClient())
                 {
                     HttpContent content = new StringContent(JsonSerializer.Serialize(recruitment), null, "application/json");
 

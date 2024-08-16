@@ -15,7 +15,7 @@ namespace HuntflowLib.Models.HelpModels
             return ConfigurateHttpClient(accessToken, baseUrl);
         }
 
-        public static HttpClient GetHttpClient(string accessToken, string accaundId, string baseUrl = null)
+        public static HttpClient GetHttpClient(string accessToken, int accaundId, string baseUrl = null)
         {
             if (baseUrl == null)
                 baseUrl = $"{defaultBaseUrl}accounts/{accaundId}/";

@@ -54,6 +54,5 @@ namespace HuntflowLib.Models
 
         [JsonPropertyName("links")]
         public IEnumerable<Link> Links { get; set; }
-
     }
 }

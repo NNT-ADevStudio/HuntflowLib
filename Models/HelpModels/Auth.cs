@@ -7,7 +7,7 @@ namespace HuntflowLib.Models.HelpModels
         public HttpClient HttpClient { get; private set; }
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
-        public int AccauntId { get; set; }
+        public int? AccauntId { get; set; } = null;
 
         public Auth(string accessToken, string refreshToken)
         {
@@ -21,7 +21,13 @@ namespace HuntflowLib.Models.HelpModels
             AccessToken = accessToken;
             RefreshToken = refreshToken;
             AccauntId = accauntId;
-            HttpClient = Configurate.GetHttpClient(accessToken);
+            HttpClient = Configurate.GetHttpClient(accessToken, accauntId);
+        }
+
+        public HttpClient GenerateHttpClient()
+        {
+            if (AccauntId == null) return Configurate.GetHttpClient(AccessToken);
+            return Configurate.GetHttpClient(AccessToken, (int)AccauntId);
         }
     }
 }
