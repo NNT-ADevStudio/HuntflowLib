@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System;
 using HuntflowLib.Models;
 using HuntflowLib.Models.HelpModels;
+using System.Net.Http;
 
 namespace HuntflowLib.Controllers
 {
@@ -40,6 +41,31 @@ namespace HuntflowLib.Controllers
                     var response = await client.GetAsync($"{ControllerUrl}/{id}");
                     var json = await response.Content.ReadAsStringAsync();
                     return JsonSerializer.Deserialize<Applicant>(json);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<bool> CreateLog(int id, Recruitment recruitment) 
+        {
+            try
+            {
+                using (var client = Auth.GenerateHttpClient())
+                {
+                    HttpContent content = new StringContent(JsonSerializer.Serialize(recruitment), null, "application/json");
+
+                    var response = await client.PutAsync($"{ControllerUrl}/{id}/logs", content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
             catch (Exception ex)
