@@ -11,9 +11,7 @@ namespace HuntflowLib.Controllers
     {
         public override string ControllerUrl => "applicants";
 
-        public ApplicantController(Auth auth) : base(auth)
-        {
-        }
+        public ApplicantController(Auth auth) : base(auth) { }
 
         public async Task<ListModel<Applicant>> Get(int page = 1)
         {
@@ -66,7 +64,7 @@ namespace HuntflowLib.Controllers
             }
         }
 
-        public async Task<bool> CreateLog(int id, Recruitment recruitment) 
+        public async Task<bool> CreateLog(int id, Recruitment recruitment)
         {
             try
             {
@@ -75,14 +73,11 @@ namespace HuntflowLib.Controllers
                     HttpContent content = new StringContent(JsonSerializer.Serialize(recruitment), null, "application/json");
 
                     var response = await client.PostAsync($"{ControllerUrl}/{id}/logs", content);
+
                     if (response.IsSuccessStatusCode)
-                    {
                         return true;
-                    }
                     else
-                    {
                         return false;
-                    }
                 }
             }
             catch (Exception ex)

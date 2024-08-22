@@ -12,9 +12,7 @@ namespace HuntflowLib.Controllers
 {
     public class FilesController : MainController
     {
-        public FilesController(Auth auth) : base(auth)
-        {
-        }
+        public FilesController(Auth auth) : base(auth) { }
 
         public override string ControllerUrl => "upload";
 
@@ -31,9 +29,6 @@ namespace HuntflowLib.Controllers
                     var content = new MultipartFormDataContent();
 
                     var fileContent = new StreamContent(File.OpenRead(path));
-                    //fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(MediaTypeNames.Application.Pdf);
-                    //content.Add(fileContent, "file", fileName);
-
 
                     fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(MediaTypeNames.Application.Pdf);
                     fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")

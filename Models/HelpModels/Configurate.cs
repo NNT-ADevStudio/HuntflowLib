@@ -29,6 +29,7 @@ namespace HuntflowLib.Models.HelpModels
             {
                 BaseAddress = new Uri(baseUrl)
             };
+
             HttpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
 
             return HttpClient;

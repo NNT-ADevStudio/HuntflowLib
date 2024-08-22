@@ -9,9 +9,7 @@ namespace HuntflowLib.Controllers
 {
     public class ApplicantOnVacancyController : MainController
     {
-        public ApplicantOnVacancyController(Auth auth) : base(auth)
-        {
-        }
+        public ApplicantOnVacancyController(Auth auth) : base(auth) { }
 
         public override string ControllerUrl => "applicants";
 
@@ -24,14 +22,11 @@ namespace HuntflowLib.Controllers
                     HttpContent content = new StringContent(JsonSerializer.Serialize(recruitment), null, "application/json");
 
                     var response = await client.PutAsync($"{ControllerUrl}/{id}/vacancy", content);
+
                     if (response.IsSuccessStatusCode)
-                    {
                         return true;
-                    }
                     else
-                    {
                         return false;
-                    }
                 }
             }
             catch (Exception ex)
