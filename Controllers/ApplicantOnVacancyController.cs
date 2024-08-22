@@ -15,7 +15,7 @@ namespace HuntflowLib.Controllers
 
         public override string ControllerUrl => "applicants";
 
-        public async Task<bool> ChangeRecruitment(int id, Recruitment recruitment)
+        public async Task<bool> ChangeRecruitment(int id, RecruitmentVacancy recruitment)
         {
             try
             {

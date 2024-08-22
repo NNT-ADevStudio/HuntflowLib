@@ -15,6 +15,23 @@ namespace HuntflowLib.Controllers
         {
         }
 
+        public async Task<ListModel<Applicant>> Get(int page = 1)
+        {
+            try
+            {
+                using (var client = Auth.GenerateHttpClient())
+                {
+                    var response = await client.GetAsync($"{ControllerUrl}?page={page}");
+                    var json = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<ListModel<Applicant>>(json);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task<ListModel<Applicant>> Search(string searchQuery)
         {
             try
@@ -32,7 +49,7 @@ namespace HuntflowLib.Controllers
             }
         }
 
-        public async Task<Applicant> Get(int id)
+        public async Task<Applicant> GetById(int id)
         {
             try
             {
@@ -57,7 +74,7 @@ namespace HuntflowLib.Controllers
                 {
                     HttpContent content = new StringContent(JsonSerializer.Serialize(recruitment), null, "application/json");
 
-                    var response = await client.PutAsync($"{ControllerUrl}/{id}/logs", content);
+                    var response = await client.PostAsync($"{ControllerUrl}/{id}/logs", content);
                     if (response.IsSuccessStatusCode)
                     {
                         return true;
