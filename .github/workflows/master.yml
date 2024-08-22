@@ -3,11 +3,11 @@ name: NuGet Package
 on:
   pull_request:
     branches: 
-      - main
+      - master
     types: [closed]
   push:
     branches: 
-      - main
+      - master
 
 jobs:
  if_merged:
